@@ -1,8 +1,14 @@
 class Api::RecipesController < ApplicationController
 
-  def single_recipe_action
-    @recipe = Recipe.first
-    render "single_recipe.json.jb"
+  def index
+    @recipes = Recipe.all
+    render "index.json.jb"
+  end
+
+  def show
+    # @recipe = Recipe.find_by(id: params[:id])
+    @recipe = Recipe.find(params[:id])
+    render "show.json.jb"
   end
 
 end
