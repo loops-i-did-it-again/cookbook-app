@@ -11,4 +11,16 @@ class Api::RecipesController < ApplicationController
     render "show.json.jb"
   end
 
+  def create
+    @recipe = Recipe.new(
+      title: params[:title],
+      ingredients: params[:ingredients],
+      directions: params[:directions],
+      prep_time: params[:prep_time],
+      chef: params[:chef]
+    )
+    @recipe.save
+    render "show.json.jb"
+  end
+
 end
