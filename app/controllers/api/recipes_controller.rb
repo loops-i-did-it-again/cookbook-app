@@ -26,11 +26,11 @@ class Api::RecipesController < ApplicationController
   def update
     @recipe = Recipe.find(params[:id])
 
-    @recipe.title = params[:title]
-    @recipe.ingredients = params[:ingredients]
-    @recipe.directions = params[:directions]
-    @recipe.prep_time = params[:prep_time]
-    @recipe.chef = params[:chef]
+    @recipe.title = params[:title] || @recipe.title
+    @recipe.ingredients = params[:ingredients] || @recipe.ingredients
+    @recipe.directions = params[:directions] || @recipe.directions
+    @recipe.prep_time = params[:prep_time] || @recipe.prep_time
+    @recipe.chef = params[:chef] || @recipe.chef
 
     @recipe.save
     render "show.json.jb"
