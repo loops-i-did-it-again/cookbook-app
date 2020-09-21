@@ -14,8 +14,12 @@ class Api::RecipesController < ApplicationController
 
   def show
     # @recipe = Recipe.find_by(id: params[:id])
-    @recipe = Recipe.find(params[:id])
-    render "show.json.jb"
+    if current_user
+      @recipe = Recipe.find(params[:id])
+      render "show.json.jb"
+    else 
+      render json: {}, status: :unauthorized
+    end
   end
 
   def create

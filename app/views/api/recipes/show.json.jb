@@ -11,5 +11,6 @@
     directions: @recipe.directions_list,
     created_at: @recipe.friendly_created_at,
     prep_time: @recipe.friendly_prep_time
-  }
+  },
+  current_user: current_user
 }
