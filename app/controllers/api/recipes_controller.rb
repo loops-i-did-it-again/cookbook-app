@@ -26,8 +26,11 @@ class Api::RecipesController < ApplicationController
       prep_time: params[:prep_time],
       chef: params[:chef]
     )
-    @recipe.save
-    render "show.json.jb"
+    if @recipe.save
+      render "show.json.jb"
+    else
+      render json: { errors: @recipe.errors.full_messages}, status: :unprocessable_entity
+    end
   end
 
   def update
@@ -39,7 +42,11 @@ class Api::RecipesController < ApplicationController
     @recipe.prep_time = params[:prep_time] || @recipe.prep_time
     @recipe.chef = params[:chef] || @recipe.chef
 
-    @recipe.save
+    if @recipe.save
+      render "show.json.jb"
+    else
+      render json: { errors: @recipe.errors.full_messages}, status: :unprocessable_entity
+    end
     render "show.json.jb"
   end
 
