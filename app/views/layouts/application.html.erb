@@ -2,13 +2,14 @@
 <html>
   <head>
     <title>CookbookApp</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= csrf_meta_tags %> 
+    <%= csp_meta_tag %> 
+    <%= stylesheet_link_tag 'application', media: 'all' %>
   </head>
 
   <body>
+    <a href="/recipes">Home</a>
+    <a href="/recipes/new">New Recipe</a>
     <%= yield %>
   </body>
 </html>
