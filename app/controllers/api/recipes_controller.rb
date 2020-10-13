@@ -24,12 +24,13 @@ class Api::RecipesController < ApplicationController
       ingredients: params[:ingredients],
       directions: params[:directions],
       prep_time: params[:prep_time],
-      user_id: current_user.id
+      image_url: params[:image_url],
+      user_id: 1
     )
     if @recipe.save
       render "show.json.jb"
     else
-      render json: { errors: @recipe.errors.full_messages}, status: :unprocessable_entity
+      render json: { errors: @recipe.errors.full_messages}, status: 422
     end
   end
 

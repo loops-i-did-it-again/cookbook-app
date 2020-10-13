@@ -5,6 +5,7 @@
   directions: @recipe.directions,
   prep_time: @recipe.prep_time,
   created_at: @recipe.created_at,
+  image_url: @recipe.image_url,
   formatted: {
     ingredients: @recipe.ingredients_list,
     directions: @recipe.directions_list,
