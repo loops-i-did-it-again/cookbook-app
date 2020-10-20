@@ -1,16 +1,20 @@
-{
-  id: @recipe.id,
-  title: @recipe.title,
-  ingredients: @recipe.ingredients,
-  directions: @recipe.directions,
-  prep_time: @recipe.prep_time,
-  created_at: @recipe.created_at,
-  image_url: @recipe.image_url,
-  formatted: {
-    ingredients: @recipe.ingredients_list,
-    directions: @recipe.directions_list,
-    created_at: @recipe.friendly_created_at,
-    prep_time: @recipe.friendly_prep_time
-  },
-  chef_name: @recipe.user.name
+recipe = render partial: "recipe.json.jb", locals: {recipe: @recipe}
+
+# custom user object
+# recipe[:user] = {
+#   id: @recipe.user.id,
+#   email: @recipe.user.email,
+#   name: @recipe.user.name
+# }
+
+# render user partial
+recipe[:user] = render partial: "api/users/user.json.jb", locals: {user: @recipe.user}
+
+recipe[:formatted] = {
+  ingredients: @recipe.ingredients_list,
+  directions: @recipe.directions_list,
+  created_at: @recipe.friendly_created_at,
+  prep_time: @recipe.friendly_prep_time
 }
+
+recipe

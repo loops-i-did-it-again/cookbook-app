@@ -1,5 +1,7 @@
 class Api::RecipesController < ApplicationController
 
+  before_action :authenticate_user, except: [:index, :show]
+
   def index
     @recipes = Recipe.all
 
@@ -25,7 +27,7 @@ class Api::RecipesController < ApplicationController
       directions: params[:directions],
       prep_time: params[:prep_time],
       image_url: params[:image_url],
-      user_id: 1
+      user_id: current_user.id
     )
     if @recipe.save
       render "show.json.jb"
@@ -41,14 +43,13 @@ class Api::RecipesController < ApplicationController
     @recipe.ingredients = params[:ingredients] || @recipe.ingredients
     @recipe.directions = params[:directions] || @recipe.directions
     @recipe.prep_time = params[:prep_time] || @recipe.prep_time
-    @recipe.chef = params[:chef] || @recipe.chef
+    @recipe.image_url = params[:image_url] || @recipe.image_url
 
     if @recipe.save
       render "show.json.jb"
     else
       render json: { errors: @recipe.errors.full_messages}, status: :unprocessable_entity
     end
-    render "show.json.jb"
   end
 
   def destroy
